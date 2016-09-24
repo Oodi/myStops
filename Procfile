@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -Dspring.profiles.active=development -Dserver.port=$PORT -jar target/*.war
