@@ -9,7 +9,7 @@ angular.module('mystops')
             self.login = function() {
                 auth.authenticate(self.credentials, function(authenticated) {
                     if (authenticated) {
-
+                        console.log("jeos");
                         $scope.error = false;
                     } else {
                         $scope.error = true;
@@ -19,7 +19,7 @@ angular.module('mystops')
 
             var init  = function() {
                 if (auth.getAuthStatus() !== false) {
-
+                    $scope.authStatus = 'findStop/find.tpl.html';
                 } else {
                     $scope.error = false;
                     $scope.authStatus = LOGINTEMPLATE;

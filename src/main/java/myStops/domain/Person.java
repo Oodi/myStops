@@ -27,11 +27,11 @@ public class Person extends AbstractPersistable<Long> {
         this.locations = new ArrayList<>();
     }
 
-    public final String getUserName() {
+    public final String getUsername() {
         return username;
     }
 
-    public final void setUserName(final String pName) {
+    public final void setUsername(final String pName) {
         this.username = pName;
     }
 

@@ -11,12 +11,16 @@
     <script src="main/app.module.js"></script>
 
     <script src="services/auth.srvc.js"></script>
+    <script src="services/stop.srvc.js"></script>
 
     <script src="login/login.ctrl.js"></script>
+
+    <script src="findStop/find.ctrl.js"></script>
 
     <link rel="stylesheet" type="text/css" href="assets/css/goldbootstrap.css">
 </head>
 <body ng-app="mystops">
-<div class="container app-container chat-animation" ng-controller="loginController" ng-include="authStatus"></div>
+<div class="container" ng-include="findStop/find.tpl.html"></div>
+<div class="container" ng-controller="loginController as login" ng-include="authStatus"></div>
 </body>
 </html>

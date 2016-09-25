@@ -1,0 +1,49 @@
+<div ng-controller="findController as find">
+    <form ng-submit="findStop()" name="findForm">
+        <div class="input-group">
+            <input type="text" ng-model="findThis" class="form-control">
+            <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="findStop()"
+                            type="submit" name="send">Laheta</button>
+                </span>
+        </div>
+    </form>
+    <div class="col-lg-7">
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th>Nimi</th>
+            <th>Kuvaus</th>
+            <th>Numero</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="stop in stops" ng-click="stopSchedule(stop.gtfsId)">
+            <td>{{stop.name}}</td>
+            <td>{{stop.desc}}</td>
+            <td>{{stop.code}}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="col-lg-5">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Nimi</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="stoptime in stoptimes | limitTo : 10" ng-click="stopSchedule(stop.gtfsId)">
+                <td>{{stoptime.trip.route.type}}</td>
+                <td>{{stoptime.trip.route.shortName}}</td>
+                <td>{{stoptime.trip.tripHeadsign}}</td>
+                <td>{{stoptime.realtimeArrival | secondsToTime}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
