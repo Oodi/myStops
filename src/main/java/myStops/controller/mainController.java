@@ -5,14 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * Created by Simo on 24.9.2016.
- */
 @Controller
 @ResponseBody
 public class mainController {
 
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     public String hello() {
         return "Hei ";
     }
