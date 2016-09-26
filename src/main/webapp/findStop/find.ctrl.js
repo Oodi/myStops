@@ -1,21 +1,22 @@
 angular.module('mystops')
     .controller('findController', ['$scope', 'stopService',
         function($scope, stopService) {
-            $scope.stops = [];
-            $scope.stoptimes = [];
+        var find = this;
+            find.stops = [];
+            find.stoptimes = [];
 
 
-        $scope.findStop = function() {
-            stopService.search($scope.findThis, function(response) {
+            find.findStop = function() {
+            stopService.search(find.findThis, function(response) {
                 console.log(response.data.data.stops);
-                $scope.stops = response.data.data.stops;
+                find.stops = response.data.data.stops;
             });
         };
 
-        $scope.stopSchedule = function(id) {
+            find.stopSchedule = function(id) {
             stopService.findStopStoptimes(id, function(response) {
                 console.log(response.data.data.stop);
-                $scope.stoptimes = response.data.data.stop.stoptimesWithoutPatterns;
+                find.stoptimes = response.data.data.stop.stoptimesWithoutPatterns;
             });
         }
 
