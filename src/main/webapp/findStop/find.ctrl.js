@@ -4,7 +4,7 @@ angular.module('mystops')
         var find = this;
             find.stops = [];
             find.stoptimes = [];
-
+            find.selected = '';
 
             find.findStop = function() {
             stopService.search(find.findThis, function(response) {
@@ -16,6 +16,7 @@ angular.module('mystops')
             find.stopSchedule = function(id) {
             stopService.findStopStoptimes(id, function(response) {
                 console.log(response.data.data.stop);
+                find.selected = id;
                 find.stoptimes = response.data.data.stop.stoptimesWithoutPatterns;
             });
         }

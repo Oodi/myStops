@@ -1,6 +1,6 @@
-<div>
-    <div class="col-lg-7">
-    <table class="table table-condensed">
+<div class="container">
+    <div class="col-lg-5">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>Nimi</th>
@@ -9,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="stop in find.stops" ng-click="find.stopSchedule(stop.gtfsId)">
+        <tr ng-repeat="stop in find.stops" ng-click="find.stopSchedule(stop.gtfsId)" ng-class="{success : find.selected === stop.gtfsId }">
             <td>{{stop.name}}</td>
             <td>{{stop.desc}}</td>
             <td>{{stop.code}}</td>
