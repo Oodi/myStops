@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3 class="modal-title">Profiili <button class="btn btn-danger pull-right" type="button" ng-click="profile.cancel()">X</button></h3>
+
+</div>
+<div class="modal-body">
+    <div class="regForm" autocomplete="off">
+        <uib-alert ng-repeat="alert in reg.alerts" type="{{alert.type}}"
+                   close="profile.closeAlert($index)"
+                   dismiss-on-timeout="{{alert.dismiss}}">{{alert.msg}}
+        </uib-alert>
+        <form class="formBox" role="form" ng-submit="profile.resetPsw()" name="resetPswForm">
+            <div class="form-group">
+                <label class="loginLabel" for="regusername">Käyttäjätunnus:</label> <input type="text"
+                                                                                           class="form-control" id="regusername" name="regusername"
+                                                                                            value="sdfsd" disabled/>
+            </div>
+            <div class="form-group">
+                <label class="loginLabel"  for="regpassword">Uusi salasana:</label> <input type="password"
+                                                                                      class="form-control" id="regpassword" name="regpassword"
+                                                                                      ng-model="profile.password" ng-minlength="4" required/>
+                <label class="loginLabel"  for="regpassword2">Uusi salasana uudestaan:</label> <input type="password"
+                                                                                           class="form-control" id="regpassword2" name="regpassword2"
+                                                                                           ng-model="profile.password2" required/>
+
+                <button type="submit" name="profile" class="btn btn-block btn-primary" ng-disabled="profile.password2 !== profile.password || resetPswForm.$invalid">Vaihda salasana</button>
+            </div>
+
+            <div class="form-group">
+                <button name="profile" class="btn btn-danger" ng-disabled="!profile.sureDelete" >Poista käyttäjä</button>
+                <label class="checkbox-inline"><input type="checkbox" ng-model="profile.sureDelete" value="">Haluan varmasti poistaa tietoni</label>
+
+            </div>
+
+        </form>
+    </div>
+</div>

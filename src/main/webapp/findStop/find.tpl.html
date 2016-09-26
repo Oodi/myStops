@@ -3,25 +3,25 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Nimi</th>
+            <th>Nimi <span class="small">(numero)</span></th>
             <th>Kuvaus</th>
-            <th>Numero</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="stop in find.stops" ng-click="find.stopSchedule(stop.gtfsId)" ng-class="{success : find.selected === stop.gtfsId }">
-            <td>{{stop.name}}</td>
+        <tr ng-repeat="stop in find.stops" ng-click="find.stopSchedule(stop.gtfsId)" ng-class="{primary : find.selected === stop.gtfsId }">
+            <td>{{stop.name}} <span class="small">({{stop.code}})</span></td>
             <td>{{stop.desc}}</td>
-            <td>{{stop.code}}</td>
+            <td><a href="#">Näytä aikataulu</a></td>
         </tr>
         </tbody>
     </table>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-7" ng-hide="find.selected === ''">
         <table class="table table-condensed">
             <thead>
             <tr>
-                <th>Nimi</th>
+                <th>{{find.selectedName}}</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -36,5 +36,17 @@
             </tr>
             </tbody>
         </table>
-    </div>
+        <form class="form-inline">
+            <div class="form-group">
+                <select class="form-control" id="sel1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Lisää listalle</button>
+            </form>
+        </div>
+
 </div>

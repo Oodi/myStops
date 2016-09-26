@@ -1,15 +1,25 @@
+<div class="modal-header">
+    <h3 class="modal-title">Rekisteröidy antamalla tiedot<button class="btn btn-danger pull-right" type="button" ng-click="reg.cancel()">X</button></h3>
+
+</div>
+<div class="modal-body">
 <div class="regForm" autocomplete="off">
-    <form class="formBox" role="form" ng-submit="login.login()">
+    <uib-alert ng-repeat="alert in reg.alerts" type="{{alert.type}}"
+               close="reg.closeAlert($index)"
+               dismiss-on-timeout="{{alert.dismiss}}">{{alert.msg}}
+    </uib-alert>
+    <form class="formBox" role="form" ng-submit="reg.register()">
         <div class="form-group">
-            <label class="loginLabel" for="username">Käyttäjätunnus:</label> <input type="text"
-                                                                                    class="form-control" id="username" name="username"
-                                                                                    ng-model="login.credentials.username"/>
+            <label class="loginLabel" for="regusername">Käyttäjätunnus:</label> <input type="text"
+                                                                                    class="form-control" id="regusername" name="regusername"
+                                                                                    ng-model="reg.username" ng-blur="reg.checkUsername()"/>
         </div>
         <div class="form-group">
-            <label class="loginLabel"  for="password">Salasana:</label> <input type="password"
-                                                                               class="form-control" id="password" name="password"
-                                                                               ng-model="login.credentials.password"/>
+            <label class="loginLabel"  for="regpassword">Salasana:</label> <input type="password"
+                                                                               class="form-control" id="regpassword" name="regpassword"
+                                                                               ng-model="reg.password"/>
         </div>
-        <button type="submit" name="login" class="btn btn-block btn-primary">Kirjaudu sisään</button>
+        <button type="submit" name="reg" class="btn btn-block btn-primary">Registeröidy</button>
     </form>
+</div>
 </div>

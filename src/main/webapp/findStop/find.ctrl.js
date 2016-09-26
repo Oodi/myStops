@@ -17,6 +17,7 @@ angular.module('mystops')
             stopService.findStopStoptimes(id, function(response) {
                 console.log(response.data.data.stop);
                 find.selected = id;
+                find.selectedName = response.data.data.stop.name;
                 find.stoptimes = response.data.data.stop.stoptimesWithoutPatterns;
             });
         }

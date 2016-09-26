@@ -23,4 +23,23 @@ public class Location extends AbstractPersistable<Long> {
         stops = new ArrayList<>();
     }
 
+    public int stopCount() {
+        return stops.size();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
+    public List<Stop> getStops() {
+        return stops;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

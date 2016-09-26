@@ -1,28 +1,33 @@
 
 angular.module('mystops')
-    .controller('loginController', ['$scope', 'auth',
-        function($scope, auth) {
-            var LOGINTEMPLATE = 'login/login.tpl.html';
-            var self = this;
-            self.credentials = {};
-
-            self.login = function() {
-                auth.authenticate(self.credentials, function(authenticated) {
+    .controller('loginController', ['$scope', '$uibModalInstance', '$window' , 'auth',
+        function($scope, $uibModalInstance, $window, auth) {
+            var login = this;
+            login.credentials = {};
+            login.loginStatus = false;
+                
+            login.login = function() {
+                auth.authenticate(login.credentials, function(authenticated) {
                     if (authenticated) {
-                        console.log("jeos");
+                        login.loginStatus = true;
                         $scope.error = false;
+                        $uibModalInstance.close(true);
+                        $window.location.reload();
                     } else {
                         $scope.error = true;
                     }
                 })
             };
 
+            login.cancel = function () {
+                $uibModalInstance.dismiss('cancel');
+            };
+
             var init  = function() {
                 if (auth.getAuthStatus() !== false) {
-                    $scope.authStatus = 'findStop/find.tpl.html';
+                    login.loginStatus = true;
                 } else {
                     $scope.error = false;
-                    $scope.authStatus = LOGINTEMPLATE;
                 }
             };
 
