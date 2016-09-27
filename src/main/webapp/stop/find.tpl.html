@@ -1,4 +1,9 @@
-<div class="container">
+<div class="container" ng-hide="!find.search">
+    <div class=" panel panel-default">
+        <div class="panel-heading" style="height: 57px">
+            <h2 class="panel-title">Hae pysäkkiä<button  class="btn btn-danger pull-right"type="button" ng-click="find.cancel()">X</button></h2>
+        </div>
+        <div class="panel-body">
     <div class="col-lg-5">
     <table class="table table-hover">
         <thead>
@@ -9,7 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="stop in find.stops" ng-click="find.stopSchedule(stop.gtfsId)" ng-class="{primary : find.selected === stop.gtfsId }">
+        <tr ng-repeat="stop in find.stops" ng-click="find.stopSchedule(stop.gtfsId)" ng-class="{info : find.selected === stop.gtfsId }">
             <td>{{stop.name}} <span class="small">({{stop.code}})</span></td>
             <td>{{stop.desc}}</td>
             <td><a href="#">Näytä aikataulu</a></td>
@@ -36,17 +41,16 @@
             </tr>
             </tbody>
         </table>
-        <form class="form-inline">
+        <form class="form-inline" ng-submit="find.addStopToLocation()" ng-hide="loginStatus">
             <div class="form-group">
-                <select class="form-control" id="sel1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                <select class="form-control" id="sel1" ng-model="find.SelectedList" required>
+                    <option disabled selected value>Valitse lista</option>
+                    <option ng-repeat="location in find.locations">{{location.name}}</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-default">Lisää listalle</button>
             </form>
         </div>
-
+        </div>
+    </div>
 </div>

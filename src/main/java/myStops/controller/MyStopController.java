@@ -1,5 +1,7 @@
 package myStops.controller;
 
+import myStops.service.MyStopService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -7,17 +9,23 @@ import java.security.Principal;
 @RestController
 public class MyStopController {
 
+    @Autowired
+    private MyStopService myStopService;
+
     @RequestMapping(value = "/mystop/location", method = RequestMethod.GET)
     @ResponseBody
-    public String addNewLocation(final Principal user) {
-        return jsonResponse("");
+    public String getLocations(final Principal user) {
+        if (user == null) {
+            return "";
+        }
+        return myStopService.getLocations(user.getName());
     }
 
     @RequestMapping(value = "/mystop/location", method = RequestMethod.POST)
     @ResponseBody
     public String addNewLocation(@RequestBody final String location,
                              final Principal user) {
-        return jsonResponse("");
+        return jsonResponse(myStopService.addNewLocation(user.getName(), location));
     }
 
     @RequestMapping(value = "/mystop/locationName", method = RequestMethod.POST)
@@ -25,14 +33,14 @@ public class MyStopController {
     public String changeLocationName(@RequestBody final String location,
                                      @RequestBody final String locationNewName,
                                  final Principal user) {
-        return jsonResponse("");
+        return jsonResponse(myStopService.changeLocationName(user.getName(), location, locationNewName));
     }
 
     @RequestMapping(value = "/mystop/location", method = RequestMethod.DELETE)
     @ResponseBody
     public String removeLocation(@RequestBody final String location,
                                  final Principal user) {
-        return jsonResponse("");
+        return jsonResponse(myStopService.deleteLocation(user.getName(), location));
     }
 
     @RequestMapping(value = "/mystop/stop", method = RequestMethod.GET)

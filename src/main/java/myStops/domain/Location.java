@@ -2,9 +2,7 @@ package myStops.domain;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

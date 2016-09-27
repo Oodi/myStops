@@ -10,6 +10,7 @@ angular.module('mystops')
                 auth.authenticate(login.credentials, function(authenticated) {
                     if (authenticated) {
                         login.loginStatus = true;
+                        $scope.loginStatus = true;
                         $scope.error = false;
                         $uibModalInstance.close(true);
                         $window.location.reload();

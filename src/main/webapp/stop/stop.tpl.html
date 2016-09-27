@@ -1,0 +1,18 @@
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <th>{{stop.selectedName}}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="stoptime in stop.stoptimes | limitTo : 10" ng-click="find.stopSchedule(stop.gtfsId)">
+        <td>{{stoptime.trip.route.type}}</td>
+        <td>{{stoptime.trip.route.shortName}}</td>
+        <td>{{stoptime.trip.tripHeadsign}}</td>
+        <td>{{stoptime.realtimeArrival | secondsToTime}}</td>
+    </tr>
+    </tbody>
+</table>

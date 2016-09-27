@@ -15,20 +15,27 @@
     <script src="services/auth.srvc.js"></script>
     <script src="services/stop.srvc.js"></script>
     <script src="services/user.srvc.js"></script>
+    <script src="services/location.srvc.js"></script>
 
     <script src="login/login.ctrl.js"></script>
     <script src="login/loginNav.ctrl.js"></script>
+
+    <script src="myStops/myStops.ctrl.js"></script>
 
     <script src="myProfile/profile.ctrl.js"></script>
 
     <script src="register/reg.ctrl.js"></script>
 
-
-    <script src="findStop/find.ctrl.js"></script>
+    <script src="location/locationList.ctrl.js"></script>
+    <script src="location/location.ctrl.js"></script>
+    <script src="location/location.cpn.js"></script>
+    <script src="stop/find.ctrl.js"></script>
+    <script src="stop/stop.ctrl.js"></script>
+    <script src="stop/stop.cpn.js"></script>
 
     <link rel="stylesheet" type="text/css" href="assets/css/goldbootstrap.css">
 </head>
-<body ng-app="mystops" ng-controller="mainController" ng-include="mainpage">
+<body ng-app="mystops" ng-controller="mainController as main" ng-include="mainpage">
 
 </body>
 </html>
