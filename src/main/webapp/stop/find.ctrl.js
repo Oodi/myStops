@@ -13,12 +13,27 @@ angular.module('mystops')
             });
         };
 
+            find.findStopNow = function() {
+                if (find.findThis.length > 2) {
+                    find.findStop();
+                }
+            };
+
             find.stopSchedule = function(id) {
             stopService.findStopStoptimes(id, function(response) {
                 find.locations = location.getLocationsArray();
                 find.selected = id;
                 find.selectedName = response.data.data.stop.name;
                 find.stoptimes = response.data.data.stop.stoptimesWithoutPatterns;
+            });
+        };
+
+        find.addStopToLocation = function () {
+            var data = {};
+            data.stopID = find.selected;
+            data.location = find.SelectedList;
+            location.addStopToLocation(data, function() {
+
             });
         };
 

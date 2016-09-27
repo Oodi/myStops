@@ -1,7 +1,7 @@
 <div class="container" ng-hide="!find.search">
     <div class=" panel panel-default">
-        <div class="panel-heading" style="height: 57px">
-            <h2 class="panel-title">Hae pysäkkiä<button  class="btn btn-danger pull-right"type="button" ng-click="find.cancel()">X</button></h2>
+        <div class="panel-heading" >
+            <h2 class="panel-title">Hae pysäkkiä<button  class="btn btn-xs btn-danger pull-right"type="button" ng-click="find.cancel()">X</button></h2>
         </div>
         <div class="panel-body">
     <div class="col-lg-5">
@@ -41,7 +41,7 @@
             </tr>
             </tbody>
         </table>
-        <form class="form-inline" ng-submit="find.addStopToLocation()" ng-hide="loginStatus">
+        <form class="form-inline" ng-submit="find.addStopToLocation()" ng-hide="!loginStatus">
             <div class="form-group">
                 <select class="form-control" id="sel1" ng-model="find.SelectedList" required>
                     <option disabled selected value>Valitse lista</option>

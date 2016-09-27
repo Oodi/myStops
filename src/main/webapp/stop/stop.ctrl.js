@@ -3,14 +3,14 @@ angular.module('mystops')
         function($scope, stopService) {
             var stop = this;
             stop.stoptimes = [];
+            var id = this.stopid;
 
-
-            stop.stopSchedule = function(id) {
+            stop.stopSchedule = function() {
                 stopService.findStopStoptimes(id, function(response) {
-                    find.selected = id;
-                    find.selectedName = response.data.data.stop.name;
-                    find.stoptimes = response.data.data.stop.stoptimesWithoutPatterns;
+                    stop.selected = id;
+                    stop.selectedName = response.data.data.stop.name;
+                    stop.stoptimes = response.data.data.stop.stoptimesWithoutPatterns;
                 });
-            }
-
+            };
+            stop.stopSchedule();
         }]);

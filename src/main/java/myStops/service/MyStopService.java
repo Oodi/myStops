@@ -3,6 +3,7 @@ package myStops.service;
 import com.google.gson.Gson;
 import myStops.domain.Location;
 import myStops.domain.Person;
+import myStops.domain.Stop;
 import myStops.repo.LocationRepo;
 import myStops.repo.PersonRepo;
 import myStops.repo.StopRepo;
@@ -76,6 +77,43 @@ public class MyStopService {
             return "VIRHE TIETOKANNASSA";
         }
         return "";
+    }
+
+    @Transactional
+    public String addStopToLocation(String username, String locationName, String stopID) {
+        Person p = personRepo.findByUsername(username);
+        System.out.println(locationName);
+        System.out.println(stopID);
+        Location l = locationRepo.findByOwnerAndName(p,locationName);
+        Stop s = stopRepo.findByGtfsId(stopID);
+        if (l == null ) {
+            return "Listaa ei löydy";
+        }
+        try {
+            if (s == null) {
+                s = new Stop();
+                s.setGtfsId(stopID);
+                stopRepo.save(s);
+            }
+
+            l.getStops().add(s);
+        } catch (Exception exception) {
+            return "VIRHE TIETOKANNASSA";
+        }
+        return "";
+    }
+
+    @Transactional
+    public String getStops(String username, String location) {
+        Person p = personRepo.findByUsername(username);
+        Location l = locationRepo.findByOwnerAndName(p,location);
+        if (l == null) {
+            return "ERROR LOCATION";
+        }
+        List<Stop> stops = l.getStops();
+
+        Gson gson = new Gson();
+        return gson.toJson(stops);
     }
 
 

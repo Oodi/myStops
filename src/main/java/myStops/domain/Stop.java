@@ -27,4 +27,8 @@ public class Stop extends AbstractPersistable<Long> {
     public String getGtfsId() {
         return gtfsId;
     }
+
+    public void setGtfsId(String gtfsId) {
+        this.gtfsId = gtfsId;
+    }
 }

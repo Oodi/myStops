@@ -1,7 +1,8 @@
-angular.module('mystops').component('stopnComponent', {
+angular.module('mystops').component('stopComponent', {
     templateUrl: 'stop/stop.tpl.html',
     controller: 'stopController',
+    controllerAs: 'stop',
     bindings: {
-        id: '@'
+        stopid: '@'
     }
 });

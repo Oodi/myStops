@@ -1,5 +1,7 @@
 package myStops.controller;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import myStops.service.MyStopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,25 +45,27 @@ public class MyStopController {
         return jsonResponse(myStopService.deleteLocation(user.getName(), location));
     }
 
-    @RequestMapping(value = "/mystop/stop", method = RequestMethod.GET)
+    @RequestMapping(value = "/mystop/stopOfLocation", method = RequestMethod.POST)
     @ResponseBody
-    public String getStopsOfLocaton(@RequestBody final String location,
+    public String getStopsOfLocation(@RequestBody final String location,
                                     final Principal user) {
-        return jsonResponse("");
+        if (user == null) {
+            return "";
+        }
+        return myStopService.getStops(user.getName(), location);
     }
 
-    @RequestMapping(value = "/mystop/stop", method = RequestMethod.POST)
+    @RequestMapping(value = "/mystop/stop", method = RequestMethod.POST, consumes = {"application/json"})
     @ResponseBody
-    public String addStopToLocation(@RequestBody final String location,
-                                    @RequestBody final String stopID,
+    public String addStopToLocation(@RequestBody final StopLocation stopLocation,
                              final Principal user) {
-        return jsonResponse("");
+        System.out.println(stopLocation);
+        return jsonResponse(myStopService.addStopToLocation(user.getName(), stopLocation.getLocation(), stopLocation.getStopID()));
     }
 
     @RequestMapping(value = "/mystop/stop", method = RequestMethod.DELETE)
     @ResponseBody
-    public String removeStopFromLocation(@RequestBody final String location,
-                                    @RequestBody final String stopID,
+    public String removeStopFromLocation(@RequestBody final StopLocation location,
                                     final Principal user) {
         return jsonResponse("");
     }
@@ -72,5 +76,37 @@ public class MyStopController {
             return "{\"status\":\"OK\"}";
         }
         return "{\"error\": \"" + error + "\"}";
+    }
+
+
+}
+
+ class StopLocation {
+     @JsonProperty("location")
+    private String location;
+     @JsonProperty("stopID")
+    private String stopID;
+
+     @JsonCreator
+    public StopLocation(@JsonProperty("location") String location, @JsonProperty("stopID") String stopID) {
+        this.location = location;
+        this.stopID = stopID;
+    }
+
+
+    public String getStopID() {
+        return stopID;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setStopID(String stopID) {
+        this.stopID = stopID;
     }
 }

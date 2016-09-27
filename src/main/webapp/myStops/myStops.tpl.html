@@ -1,6 +1,6 @@
 <div class="container-fluid" ng-controller="myStopstController as myStops">
     <div class="col-lg-3" ng-controller="locationListController as locationList" ng-include="'location/locationList.tpl.html'"></div>
     <div class="col-lg-9">
-    <location-component name="showLocation"></location-component>
+    <location-component ng-repeat="location in myStops.show" locationname="{{myStops.selectedLocation}}"></location-component>
     </div>
 </div>

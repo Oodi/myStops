@@ -32,7 +32,8 @@ angular.module('mystops')
         }
 
         function stopsOfLocation(location, callback) {
-            $http.get('/mystop/stop', location).then(callback);
+            console.log(location);
+            $http.post('/mystop/stopOfLocation', location).then(callback);
         }
 
         function deleteStopFromLocation(data, callback) {
