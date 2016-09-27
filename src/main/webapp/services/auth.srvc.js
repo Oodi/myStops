@@ -1,6 +1,7 @@
 angular.module('mystops')
     .factory('auth', function ($rootScope, $http) {
         var authenticated = false;
+        var username;
 
         function authenticate(credentials, callback) {
             var headers = credentials && credentials.username ? {
@@ -14,6 +15,7 @@ angular.module('mystops')
             }).then(function (response) {
                 if (response.data.name) {
                     authenticated = true;
+                    username = response.data.name;
                 } else {
                     authenticated = false;
                 }
@@ -33,10 +35,15 @@ angular.module('mystops')
             return authenticated;
         }
 
+        function getUsername() {
+            return username;
+        }
+
 
         var auth = {
             authenticate: authenticate,
             getAuthStatus: getAuthStatus,
+            getUsername: getUsername,
             clear: clear
         };
 

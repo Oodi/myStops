@@ -1,30 +1,56 @@
 
 angular.module('mystops')
-    .controller('profileController', ['$scope', '$uibModalInstance' , 'userService',
-        function($scope, $uibModalInstance, userService) {
+    .controller('profileController', ['$scope', '$uibModalInstance', '$window', 'base64' , 'userService', 'auth',
+        function($scope, $uibModalInstance, $window, base64, userService, auth) {
             var profile = this;
             profile.alerts = [];
+            profile.username = auth.getUsername();
 
             profile.resetPsw = function() {
-
-            };
-
-            profile.checkUsername = function() {
-                userService.validUsername(reg.username, function(response) {
+                userService.resetPassword(base64.encode(profile.password), function(response) {
                     if (response.data.status === 'OK') {
-                        reg.alerts.push({
+                        profile.alerts.push({
                             type: 'success',
-                            dismiss: 4000,
-                            msg: 'Käyttäjänimi ei ole varattu!'
+                            msg: 'Salasana vaihdettu'
                         });
                     } else {
-                        reg.alerts.push({
+                        profile.alerts.push({
                             type: 'danger',
                             msg: '' + response.data.error
                         });
                     }
                 })
             };
+
+            profile.deleteMe = function() {
+                if (profile.sureDelete) {
+                    userService.delUser( function(response) {
+                        if (response.data.status === 'OK') {
+                            profile.alerts.push({
+                                type: 'success',
+                                msg: 'Nyt lähtee'
+                            });
+                            auth.clear(function() {
+                                $window.location.reload();
+                            });
+
+                        } else {
+                            profile.alerts.push({
+                                type: 'danger',
+                                msg: '' + response.data.error
+                            });
+                        }
+                    })
+                } else {
+                    profile.alerts.push({
+                        type: 'danger',
+                        msg: 'VIRHE'
+                    });
+                }
+
+            };
+
+
 
             profile.closeAlert = function (index) {
                 $scope.alerts.splice(index, 1);

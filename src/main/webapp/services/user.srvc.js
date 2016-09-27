@@ -6,7 +6,7 @@ angular.module('mystops')
             $http.post('/person/isUsernameTaken/', username).then(callback);
         }
 
-        function createUser(user , callback) {
+        function register(user , callback) {
             $http.post('/person/newuser', user).then(callback);
         }
 
@@ -22,7 +22,7 @@ angular.module('mystops')
 
         var userv = {
             validUsername: validUsername,
-            createUser: createUser,
+            register: register,
             delUser: delUser,
             resetPassword: resetPassword
         };

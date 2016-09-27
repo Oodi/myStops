@@ -77,6 +77,8 @@ public class UserService {
             return "Virheellinen muotoilu";
         }
         String userName = person.getUsername();
+        System.out.println(person.getUsername());
+        System.out.println(person.getHashOfPasswordAndSalt());
         if (person.getHashOfPasswordAndSalt() == null
                 || person.getHashOfPasswordAndSalt().isEmpty()
                 || userName == null
@@ -91,6 +93,7 @@ public class UserService {
     private Person makePersonFrom(final String encodedPersonJson) {
         try {
             String decodedPersonJson = decode(encodedPersonJson);
+            System.out.println(decodedPersonJson);
             decodedPersonJson = decodedPersonJson.replaceFirst("password",
                     "authenticationHash");
             Gson gson = new Gson();

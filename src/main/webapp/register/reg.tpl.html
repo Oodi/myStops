@@ -1,5 +1,5 @@
-<div class="modal-header">
-    <h3 class="modal-title">Rekisteröidy antamalla tiedot<button class="btn btn-danger pull-right" type="button" ng-click="reg.cancel()">X</button></h3>
+<div class="modal-header" >
+    <h3 class="modal-title"><span ng-hide="reg.done">Rekisteröidy antamalla tiedot</span><button class="btn btn-danger pull-right" type="button" ng-click="reg.cancel()">X</button></h3>
 
 </div>
 <div class="modal-body">
@@ -8,18 +8,21 @@
                close="reg.closeAlert($index)"
                dismiss-on-timeout="{{alert.dismiss}}">{{alert.msg}}
     </uib-alert>
-    <form class="formBox" role="form" ng-submit="reg.register()">
+    <form class="formBox" role="form" ng-submit="reg.register()" name="registerForm" ng-hide="reg.done">
         <div class="form-group">
             <label class="loginLabel" for="regusername">Käyttäjätunnus:</label> <input type="text"
                                                                                     class="form-control" id="regusername" name="regusername"
-                                                                                    ng-model="reg.username" ng-blur="reg.checkUsername()"/>
+                                                                                    ng-model="reg.newUser.username" ng-minlength="2" ng-blur="reg.checkUsername()"/>
         </div>
         <div class="form-group">
             <label class="loginLabel"  for="regpassword">Salasana:</label> <input type="password"
                                                                                class="form-control" id="regpassword" name="regpassword"
-                                                                               ng-model="reg.password"/>
+                                                                               ng-model="reg.newUser.password" required/>
+            <label class="loginLabel"  for="regpassword2">Salasana uudestaan:</label> <input type="password"
+                                                                                                  class="form-control" id="regpassword2" name="regpassword2"
+                                                                                                  ng-model="reg.password2" required/>
         </div>
-        <button type="submit" name="reg" class="btn btn-block btn-primary">Registeröidy</button>
+        <button type="submit" name="reg" class="btn btn-block btn-primary" ng-disabled="reg.password2 !== reg.newUser.password || registerForm.$invalid">Rekisteröidy</button>
     </form>
 </div>
 </div>

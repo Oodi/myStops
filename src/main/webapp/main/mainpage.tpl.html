@@ -1,0 +1,23 @@
+<div class="container-fluid" ng-controller="findController as find">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Minun pysäkkini</a>
+            </div>
+            <form class="navbar-form navbar-left" role="search" ng-submit="find.findStop()">
+                <div class="form-group">
+                    <input type="text" ng-model="find.findThis" class="form-control" placeholder="Etsi pysäkkiä nimellä">
+                </div>
+                <button type="submit" class="btn btn-default">Hae</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right" ng-controller="loginNavController as login" >
+                <li ng-hide="loginStatus"><a href="" ng-click="login.register()"><span class="glyphicon glyphicon-user"></span> Rekisteröidy</a></li>
+                <li ng-hide="loginStatus"><a href="" ng-click="login.startLogin()"><span class="glyphicon glyphicon-log-in"></span> Kirjaudu</a></li>
+                <li ng-hide="!loginStatus"><a href="" ng-click="login.profile()"><span class="glyphicon glyphicon-user"></span> Omat tiedot</a></li>
+                <li ng-hide="!loginStatus"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Kirjaudu ulos</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div ng-include="'findStop/find.tpl.html'"></div>
+    <div ng-include="'myStops/myStops.tpl.html'"></div>
+</div>
