@@ -5,6 +5,11 @@ angular.module('mystops')
             stop.stoptimes = [];
             var id = this.stopid;
 
+            stop.delete = function() {
+                console.log('del1');
+                stop.onDelete({stopid: id});
+            };
+
             stop.stopSchedule = function() {
                 stopService.findStopStoptimes(id, function(response) {
                     stop.selected = id;

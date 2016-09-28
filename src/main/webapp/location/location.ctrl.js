@@ -6,15 +6,27 @@ angular.module('mystops')
 
             location.stops = [];
 
+            location.deleteStop = function(stopid) {
+                console.log(arrayObjectIndexOf(location.stops, stopid));
+                location.stops = [];
+            };
+
 
             var init = function() {
                 location.stops = [];
                 locationService.stopsOfLocation(name, function(response) {
-                    console.log(response);
                     location.stops = response.data;
-                    console.log(location.stops);
                 });
 
+            };
+
+            var arrayObjectIndexOf = function (myArray, searchTerm, property) {
+                for (var i = 0, len = myArray.length; i < len; i++) {
+                    if (myArray[i][property] === searchTerm) {
+                        return i
+                    }
+                }
+                return -1;
             };
 
             init();

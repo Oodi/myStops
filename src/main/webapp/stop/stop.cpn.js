@@ -3,6 +3,7 @@ angular.module('mystops').component('stopComponent', {
     controller: 'stopController',
     controllerAs: 'stop',
     bindings: {
-        stopid: '@'
+        stopid: '@',
+        onDelete: '&'
     }
 });
