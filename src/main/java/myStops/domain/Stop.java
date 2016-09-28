@@ -14,14 +14,8 @@ public class Stop extends AbstractPersistable<Long> {
     @Column(unique = true)
     private String gtfsId;
 
-    private int priority;
-
     public Stop() {
 
-    }
-
-    public int getPriority() {
-        return priority;
     }
 
     public String getGtfsId() {
