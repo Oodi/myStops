@@ -5,7 +5,7 @@
 
     <groupId>MyStops</groupId>
     <artifactId>MyStops</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.0</version>
     <packaging>war</packaging>
 
     <name>MyStops</name>
@@ -147,7 +147,40 @@
             <artifactId>spring-security-saml2-core</artifactId>
             <version>1.0.2.RELEASE</version>
         </dependency>
-
+        <!--Test dependencies for handling jsons-->
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>0.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path-assert</artifactId>
+            <version>0.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!-- JavaDocin generoimiseen -->
         <dependency>
@@ -236,9 +269,6 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.1.0</version>
-                <configuration>
-                    <repoToken>tGCOU6PiHPHfoeZPBBA6QedChzJt2NFQI</repoToken>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -247,7 +277,7 @@
                 <version>0.7.6.201602180812</version>
                 <configuration>
                     <excludes>
-
+                        <exclude>myStops/config/HibernateConfig.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -266,8 +296,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-
 
             <plugin>
                 <groupId>com.github.webdriverextensions</groupId>

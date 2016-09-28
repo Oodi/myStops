@@ -35,10 +35,6 @@ public class Person extends AbstractPersistable<Long> {
         this.username = pName;
     }
 
-    public final int locationCount() {
-        return this.locations.size();
-    }
-
     public List<Location> getLocations() {
         return locations;
     }
@@ -52,7 +48,6 @@ public class Person extends AbstractPersistable<Long> {
         this.authenticationHash = BCrypt.hashpw(plainTextPassword, this.salt);
     }
 
-    public final String getSalt() {
-        return salt;
+    public final String getSalt() {return salt;
     }
 }

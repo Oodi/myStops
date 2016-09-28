@@ -48,6 +48,7 @@ public class UserService {
     ) {
         try {
             String decodedPassword = decode(encodedPassword);
+            System.out.println(decodedPassword);
             if (decodedPassword == null || decodedPassword.length() < 5) {
                 return "Salasana liian lyhyt";
             }
@@ -55,7 +56,9 @@ public class UserService {
             if (person == null) {
                 return "Käyttäjää ei löydy.";
             }
+            System.out.println(person.getUsername());
             person.hashPasswordWithSalt(decodedPassword);
+            System.out.println(person.getHashOfPasswordAndSalt());
             return "";
         } catch (Exception exception) {
             return "Virhe salasanan kääntämisessä selkokieliseen muotoon"

@@ -3,12 +3,14 @@ package myStops.domain;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Location extends AbstractPersistable<Long> {
 
+    @NotNull
     private String name;
 
     @ManyToOne
@@ -19,10 +21,6 @@ public class Location extends AbstractPersistable<Long> {
 
     public Location() {
         stops = new ArrayList<>();
-    }
-
-    public int stopCount() {
-        return stops.size();
     }
 
     public void setName(String name) {

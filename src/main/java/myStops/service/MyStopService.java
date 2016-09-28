@@ -29,7 +29,7 @@ public class MyStopService {
     public String addNewLocation(String username, String locationName) {
         Person p = personRepo.findByUsername(username);
         Location l1 = locationRepo.findByOwnerAndName(p, locationName);
-        if (l1 != null) {
+        if (locationName == null || locationName.isEmpty() || l1 != null) {
             return "Lista on jo olemassa";
         }
         Location l = new Location();
