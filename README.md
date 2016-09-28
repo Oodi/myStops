@@ -5,4 +5,4 @@
 Verkkosivu HSL:n pysäkkiaikataulujen hakemiseen ja listaamiseen
 
 ## Testaa sovellusta Herokussa
-[myStops](http://stopmy.herokuapp.com/pro)
+[myStops](http://stopmy.herokuapp.com/)
