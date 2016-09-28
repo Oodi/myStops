@@ -2,6 +2,17 @@ angular.module('mystops')
     .controller('findController', ['$scope', 'stopService', 'location',
         function($scope, stopService, location) {
         var find = this;
+            find.myInterval = 5000;
+            find.image = 'assets/img/ohje1.jpg';
+            find.image2 = 'assets/img/Ohje2.jpg';
+            find.slides = [];
+            find.slides.push({
+                image: find.image
+            });
+            find.slides.push({
+                image: find.image2
+            });
+
             find.stops = [];
             find.stoptimes = [];
             find.selected = '';
@@ -33,7 +44,7 @@ angular.module('mystops')
             data.stopID = find.selected;
             data.location = find.SelectedList;
             location.addStopToLocation(data, function() {
-
+                $scope.$broadcast('addLocation' , {selectedList: find.SelectedList});
             });
         };
 

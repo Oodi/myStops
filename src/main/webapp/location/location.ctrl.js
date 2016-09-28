@@ -1,32 +1,48 @@
 angular.module('mystops')
-    .controller('locationController', ['$scope', 'location',
-        function($scope, locationService) {
+    .controller('locationController', ['$scope', '$uibModal', 'location',
+        function ($scope, $uibModal, locationService) {
             var location = this;
-            var name = this.locationname;
-
+            location.name = this.locationname;
             location.stops = [];
 
-            location.deleteStop = function(stopid) {
-                console.log(arrayObjectIndexOf(location.stops, stopid));
-                location.stops = [];
+            location.deleteStop = function (stopid) {
+                var data = {};
+                data.stopID = stopid;
+                data.location = location.name;
+                locationService.deleteStopFromLocation(data, function () {
+                    init();
+                });
             };
 
+            $scope.$on('addLocation', function(event, obj) {
+                if(location.name === obj.selectedList) {
+                   init();
+                }
+            });
 
-            var init = function() {
+            location.edit = function () {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'location/locationEdit.tpl.html',
+                    controller: 'locationEditController',
+                    controllerAs: 'lEdit',
+                    resolve: {
+                        getLocationName: function () {
+                            return location.name;
+                        }
+                    }
+                });
+                modalInstance.result.then(function (result) {
+                    location.onChange();
+                });
+            };
+
+            var init = function () {
                 location.stops = [];
-                locationService.stopsOfLocation(name, function(response) {
+                locationService.stopsOfLocation(location.name, function (response) {
                     location.stops = response.data;
                 });
 
-            };
-
-            var arrayObjectIndexOf = function (myArray, searchTerm, property) {
-                for (var i = 0, len = myArray.length; i < len; i++) {
-                    if (myArray[i][property] === searchTerm) {
-                        return i
-                    }
-                }
-                return -1;
             };
 
             init();

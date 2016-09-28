@@ -20,7 +20,11 @@ angular.module('mystops')
         }
 
         function deleteLocation(name, callback) {
-            $http.delete('/mystop/location', name).then(callback);
+            $http({
+                method: 'DELETE',
+                url: '/mystop/location',
+                data: name
+            }).then(callback);
         }
 
         function changeLocationName(names, callback) {
@@ -32,12 +36,17 @@ angular.module('mystops')
         }
 
         function stopsOfLocation(location, callback) {
-            console.log(location);
             $http.post('/mystop/stopOfLocation', location).then(callback);
+
         }
 
         function deleteStopFromLocation(data, callback) {
-            $http.delete('/mystop/stop', data).then(callback);
+            $http({
+                    method: 'DELETE',
+                    url: '/mystop/stop',
+                    data: data,
+                headers: {'Content-Type': 'application/json;charset=utf-8'}
+        }).then(callback);
         }
 
 

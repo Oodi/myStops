@@ -30,12 +30,11 @@ public class MyStopController {
         return jsonResponse(myStopService.addNewLocation(user.getName(), location));
     }
 
-    @RequestMapping(value = "/mystop/locationName", method = RequestMethod.POST)
+    @RequestMapping(value = "/mystop/locationName", method = RequestMethod.POST, consumes = {"application/json"})
     @ResponseBody
-    public String changeLocationName(@RequestBody final String location,
-                                     @RequestBody final String locationNewName,
+    public String changeLocationName(@RequestBody final ChangeLocation names,
                                  final Principal user) {
-        return jsonResponse(myStopService.changeLocationName(user.getName(), location, locationNewName));
+        return jsonResponse(myStopService.changeLocationName(user.getName(), names.getOldName(), names.getNewName()));
     }
 
     @RequestMapping(value = "/mystop/location", method = RequestMethod.DELETE)
@@ -59,15 +58,14 @@ public class MyStopController {
     @ResponseBody
     public String addStopToLocation(@RequestBody final StopLocation stopLocation,
                              final Principal user) {
-        System.out.println(stopLocation);
         return jsonResponse(myStopService.addStopToLocation(user.getName(), stopLocation.getLocation(), stopLocation.getStopID()));
     }
 
-    @RequestMapping(value = "/mystop/stop", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/mystop/stop", method = RequestMethod.DELETE, consumes = {"application/json"})
     @ResponseBody
-    public String removeStopFromLocation(@RequestBody final StopLocation location,
+    public String removeStopFromLocation(@RequestBody final StopLocation stopLocation,
                                     final Principal user) {
-        return jsonResponse("");
+        return jsonResponse(myStopService.removeStopFromLocation(user.getName(), stopLocation.getLocation(), stopLocation.getStopID()));
     }
 
 
@@ -108,5 +106,26 @@ public class MyStopController {
 
     public void setStopID(String stopID) {
         this.stopID = stopID;
+    }
+}
+
+class ChangeLocation {
+    @JsonProperty("oldName")
+    private String oldName;
+    @JsonProperty("newName")
+    private String newName;
+
+    @JsonCreator
+    public ChangeLocation(@JsonProperty("oldName") String oldName, @JsonProperty("newName") String newName) {
+        this.oldName = oldName;
+        this.newName = newName;
+    }
+
+    public String getNewName() {
+        return newName;
+    }
+
+    public String getOldName() {
+        return oldName;
     }
 }

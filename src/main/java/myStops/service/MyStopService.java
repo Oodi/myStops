@@ -82,8 +82,6 @@ public class MyStopService {
     @Transactional
     public String addStopToLocation(String username, String locationName, String stopID) {
         Person p = personRepo.findByUsername(username);
-        System.out.println(locationName);
-        System.out.println(stopID);
         Location l = locationRepo.findByOwnerAndName(p,locationName);
         Stop s = stopRepo.findByGtfsId(stopID);
         if (l == null ) {
@@ -104,6 +102,22 @@ public class MyStopService {
     }
 
     @Transactional
+    public String removeStopFromLocation(String username, String locationName, String stopID) {
+        Person p = personRepo.findByUsername(username);
+        Location l = locationRepo.findByOwnerAndName(p,locationName);
+        Stop s = stopRepo.findByGtfsId(stopID);
+        if (l == null ) {
+            return "Listaa ei löydy";
+        }
+        try {
+            l.getStops().remove(s);
+        } catch (Exception exception) {
+            return "VIRHE TIETOKANNASSA";
+        }
+        return "";
+    }
+
+    @Transactional
     public String getStops(String username, String location) {
         Person p = personRepo.findByUsername(username);
         Location l = locationRepo.findByOwnerAndName(p,location);
@@ -111,7 +125,6 @@ public class MyStopService {
             return "ERROR LOCATION";
         }
         List<Stop> stops = l.getStops();
-
         Gson gson = new Gson();
         return gson.toJson(stops);
     }

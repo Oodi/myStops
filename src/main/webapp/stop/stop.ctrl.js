@@ -6,7 +6,6 @@ angular.module('mystops')
             var id = this.stopid;
 
             stop.delete = function() {
-                console.log('del1');
                 stop.onDelete({stopid: id});
             };
 

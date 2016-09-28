@@ -3,6 +3,7 @@ angular.module('mystops').component('locationComponent', {
     controller: 'locationController',
     controllerAs: 'location',
     bindings: {
-        locationname: '@'
+        locationname: '@',
+        onChange: '&'
     }
 });

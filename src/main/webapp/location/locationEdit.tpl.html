@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">Muokkaa listaa <button class="btn btn-danger pull-right" type="button" ng-click="lEdit.cancel()">X</button></h3>
+
+</div>
+<div class="modal-body">
+    <div class="regForm" autocomplete="off">
+        <uib-alert ng-repeat="alert in lEdit.alerts" type="{{alert.type}}"
+                   close="profile.closeAlert($index)"
+                   dismiss-on-timeout="{{alert.dismiss}}">{{alert.msg}}
+        </uib-alert>
+        <form class="formBox" role="form" ng-submit="lEdit.changeName()" name="lEditForm">
+            <div class="form-group">
+                <label class="loginLabel" for="regusername">Listan nimi:</label> <input type="text"
+                                                                                           class="form-control" id="regusername" name="regusername" ng-model="lEdit.name"
+                                                                                           required ng-minlength="1"/>
+            </div>
+
+                <button type="submit" name="profile" class="btn btn-block btn-primary" ng-disabled="lEditForm.$invalid">Vaihda nimi</button>
+
+        </form>
+        <div class="form-group">
+            <button name="profile" class="btn btn-danger" ng-disabled="!lEdit.sureDelete" ng-click="lEdit.deleteMe()">Poista lista</button>
+            <label class="checkbox-inline"><input type="checkbox" ng-model="lEdit.sureDelete" value="">Haluan varmasti poistaa listan</label>
+
+        </div>
+
+    </div>
+</div>

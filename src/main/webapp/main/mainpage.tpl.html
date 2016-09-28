@@ -19,5 +19,12 @@
         </div>
     </nav>
     <div ng-include="'stop/find.tpl.html'"></div>
+    <div class="col-lg-8 col-lg-offset-2" ng-hide="loginStatus || find.search">
+    <uib-carousel interval="find.myInterval" active="activeSlide" >
+        <uib-slide ng-repeat="slide in find.slides" index="$index">
+            <img ng-src="{{slide.image}}" style="margin:auto;">
+        </uib-slide>
+    </uib-carousel>
+    </div>
     <div ng-hide="!loginStatus" ng-include="'myStops/myStops.tpl.html'"></div>
 </div>
