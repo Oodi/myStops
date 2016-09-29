@@ -9,13 +9,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Kehitysprofiili
+ */
 @Configuration
 @Profile("development")
 public class DevProfile {
 
+    /**
+     * Sailio kayttajille
+     */
     @Autowired
     private PersonRepo personRepo;
 
+    /**
+     * Luo testikayttajan jarjestelmaan
+     */
     @PostConstruct
     @Transactional
     public void init() {
