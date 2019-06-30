@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import myStops.Application;;
+import myStops.Application;
 import myStops.domain.Person;
 import myStops.repo.PersonRepo;
 import org.springframework.util.Base64Utils;

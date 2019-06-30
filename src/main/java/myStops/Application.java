@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.*;
 public class Application {
 
     /**
-     * Käynnistää Spring sovelluksetn
+     * Käynnistää Spring sovelluksen
      * @param args Komentoriviargumentit
      */
     public static void main(String[] args) {
